@@ -134,44 +134,36 @@ function CreateTable()
     
     global $arrayFileContent;
     $arrayFileContent = explode(";", $fileContent);
-    echo "<form>".
-    "<table style='text-align: center;border:1px solid black;'>
-  <thead>
-  <tr>
-    <th>ID</th>
-     <th>Type</th>
-     <th>S</th>
-     <th>P</th>
-     
-  </tr>
-  </thead>
-  <tbody>
-  <tr>";
+    
+    echo '<div>'.
+    "<div style='display:flex;justify-content: space-around;'><span>ID</span><span>type</span><span>S</span><span>P</span></div>";
+
+    $arrayFileContent = explode(';',implode(";", $arrayFileContent));
+    
+    
     for ($i=0; $i < count($arrayFileContent)-1; $i++) { 
         $arrayExploded = explode(":", $arrayFileContent[$i]);
 
         $type = $arrayExploded[0];
         $X = $arrayExploded[1];
         $Y = $arrayExploded[2];
-        
-         echo "<td>$i</td>".
-            "<td>$type</td>".
-            "<td>$X</td>".
-            "<td>$Y</td>".
-            "<input type='hidden' name='id' value='$i'>".
-            "<th><form><input type='submit' value='Удалить'></input></form></th>".
-            
-            "</tr>";
+        echo "<form method='post'>";
+        echo "<input type='hidden' name='id' value='$i'>";
+        echo "<div style='display:flex;justify-content: space-around;'><span>$i</span><span>$type</span><span>$X</span><span>$Y</span><input type='submit' value='Удалить'></div>";
+        echo "</form>";
     }
-    echo "</table>";
+
     
 }
 
 function DeleteElement($arrayFileContent, $i)
 {
-    unset($arrayFileContent[$i]);
+
+    unset($arrayFileContent["$i"]);
+    $arrayImploded = implode(';', $arrayFileContent);
     print_r($arrayFileContent);
-    file_put_contents(FILENAME, $arrayFileContent);
+    print_r($arrayImploded);
+    file_put_contents(FILENAME, $arrayImploded);
 }
 function GetKeysFromArray($array)
 {
@@ -224,10 +216,10 @@ if (isset($_POST['type'])) {
 }
 
 
+
+
+
 CreateTable();
-// if (isset($_POST['id'])) {
-//     DeleteElement($arrayFileContent, $_POST['id']);
-    
-// }
-print_r( $arrayFileContent);
+DeleteElement($arrayFileContent, $_POST['id']);
+//
     

@@ -1,1 +1,2 @@
-Circle:1007.94:2015.88;Rectangle:384:88;Rectangle:384:88;Rectangle:384:88;Rectangle:384:88;Rectangle:384:88;Rectangle:384:88;Rectangle:384:88;
+
+Square:9:6
