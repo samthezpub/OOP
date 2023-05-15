@@ -220,6 +220,9 @@ if (isset($_POST['type'])) {
 
 
 CreateTable();
-DeleteElement($arrayFileContent, $_POST['id']);
+if (isset($_POST['id'])) {
+    DeleteElement($arrayFileContent, $_POST['id']);
+}
+
 //
     
